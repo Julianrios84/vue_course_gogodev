@@ -1,0 +1,70 @@
+<template>
+  <h1>Social Login</h1>
+  <button @click="loginGoogle">Login with Google</button>
+  <button @click="loginFacebook">Login with Facebook</button>
+  <button @click="loginTwitter">Login with Twitter</button>
+  <button @click="loginGithub">Login with Github</button>
+</template>
+
+<script setup lang="ts">
+  import { FacebookAuthProvider, getAuth, GithubAuthProvider, GoogleAuthProvider, signInWithPopup, TwitterAuthProvider } from '@firebase/auth';
+  const googleProvider = new GoogleAuthProvider()
+  const facebookProvider = new FacebookAuthProvider()
+  const twitterProvider = new TwitterAuthProvider();
+  const githubProvider = new GithubAuthProvider()
+
+  const auth = getAuth()
+
+  const loginGoogle = () => {
+    signInWithPopup(auth, googleProvider)
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result)
+        const token = credential?.accessToken;
+        alert("Success!")
+      })
+      .catch((error) => {
+        alert("Login Failed!")
+      })
+  }
+
+  const loginFacebook = () => {
+    signInWithPopup(auth, facebookProvider)
+      .then((result) => {
+        const credential = FacebookAuthProvider.credentialFromResult(result)
+        const token = credential?.accessToken;
+        alert("Success!")
+      })
+      .catch((error) => {
+        alert("Login Failed!")
+      })
+  }
+
+  const loginTwitter = () => {
+    signInWithPopup(auth, twitterProvider)
+      .then((result) => {
+        const credential = TwitterAuthProvider.credentialFromResult(result)
+        const token = credential?.accessToken;
+        alert("Success!")
+      })
+      .catch((error) => {
+        alert("Login Failed!")
+      })
+  }
+
+  const loginGithub = () => {
+    signInWithPopup(auth, githubProvider)
+      .then((result) => {
+        const credential = GithubAuthProvider.credentialFromResult(result)
+        const token = credential?.accessToken;
+        alert("Success!")
+      })
+      .catch((error) => {
+        alert("Login Failed!")
+      })
+  }
+
+</script>
+
+<style scoped>
+
+</style>
